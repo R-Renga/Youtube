@@ -1,0 +1,472 @@
+Machine Coding
+
+1.TodoList
+2.fetch data from api
+3.forms
+4.quiz apps
+5.nested filters
+6.caraousel
+7.search
+8.hooks
+9.sorting
+10.infinite scroll
+11.e-commercewebsite
+12.couting
+13.debouncing
+14.higherordercomponents
+
+
+
+Requirement clarification : 
+
+1.features - > features i need to cover 
+2. Tech stack - React have 2 layers
+   ui layer -  i am going to use tailwind css - its a modern framework to customize the css and it takes less time to cover.
+   data layer - redux toolkit - because it was an large scale application
+   react-router-dom - its was a powerful and flexible library  using in react in these days
+                       its never reload the entire page,its behave like single page application
+  bundlers           - i worked on webpack and parcel,
+                       if i use any bundlers, other than web pack,it cant able create react app using npx,everything i want to do
+                        manually.
+ testing          - jest,react-testing-library
+
+
+
+ 3.A MORE PLANNING WILL YOU DO, A BETTER CODE YOU WILL WRITE.
+
+
+ YOUTUBE : 
+
+
+ 1.npx create-react-app my-youtube -> 
+ npx will execute my package at once
+
+ 2.setuptest - > used to import jest framework,then only we use toBeInTheDocument,waitfor inbuildmethods we can use.
+
+ 3.reportWebvitals -> you can track the performance ,measure of your application.
+
+ //////First Thing /////
+
+ 1.Modifiy app.js
+
+ 2.CSS - TAILWIND
+
+ npm i -D tailwindcss -> -d only in development,not in production ,because bundlers converts that into css in production.
+
+npx tailwindcss init -> it gives us config file to write the file types that tailwind need to execute.(content: ["./src/**/*.{js,html}"],)
+
+3.remove css in app.css , and import tailwind , (base,components,utilities)
+
+@import 'tailwindcss/base';
+
+///second thing ///
+
+component skeltons
+
+1.make it - structure wise in a proper way
+
+header
+body
+footer
+
+//Third Thing//
+
+1.Header component
+
+make it as section wise  in div tag and grid grid-flow-col
+
+three section
+
+1.hmburgermenu,youtube
+2.search
+3.usericon
+
+make it as good in css
+
+2.side bar components
+
+make it as good in css
+
+
+//Fourth//
+
+Make it work above two features as functionality wise.
+
+redux - install and configure it
+
+GET https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&regionCode=US&key=[YOUR_API_KEY] HTTP/1.1
+
+Authorization: Bearer [YOUR_ACCESS_TOKEN]
+Accept: application/json
+
+
+urlsearchparams - is used to read query string parameters in the url
+useSearchparams - it gives urlsearchparams
+
+const searchparams = useSearchparams();
+
+searchparams.get("v") 
+
+
+higher order components - > a component takes an existing component and Modifiy it.
+
+import React from 'react';
+
+const withHeader = (WrappedComponent) => {
+    return (
+      <div>
+        <h1>Header</h1>
+        <WrappedComponent name = {"raja"} />
+      </div>
+    );
+  };
+
+
+const MyComponent = ({ name }) => {
+  return (
+    <div>
+      <p>Hello, {name}!</p>
+    </div>
+  );
+};
+
+const MyComponentWithHeader = withHeader(MyComponent);
+
+export default MyComponentWithHeader;
+
+
+ReactPlayer - > video library.
+video.js
+react-Vimeo
+
+
+Debouncing - > it will skip some action and execute it at the end of that action.
+               for example search suggestions
+
+skip bouncing with the help of setTimeout(() => function(),200) --- HEADER.JS
+
+
+ onFocus={() => setShowSuggestion(true)} - focus the text.
+ onBlur={() => setShowSuggestion(false)}  - out of focus the text.
+
+Attributes
+ Id - do some action to the specific element in javascript or css using id.
+ class - give styles to the element.group html elements together using class.
+            <button class="btn">Click me</button>
+           <button class="btn">Click me too</button>
+
+
+An algorithm with a time complexity of O(n) has a runtime that is proportional to the size of the input data.
+big (O) of n;
+
+
+caching to optmize the search
+store the keystroke data in redux store.use it when the click backspace button,or remove keystroke
+
+
+n level nested comments : 
+
+recursive call of components : comments container.js
+
+
+live chat >>>>> infinite scrolling >>>> pagination
+
+
+
+websocket - Its a two way connection between ui and the server,like handshake between them
+,its using for real time data like live chat.
+
+Api - one directional , interval
+
+websocket - two directional, socket.io,sockjs , no interval(live data any time)
+
+
+
+APIs are used for making request-response style interactions between a client and a server, whereas Websockets are 
+used for real-time, bi-directional communication between a client and a server.
+
+We done api polling using setInterval in useEffect, for Live chat
+
+
+e.preventdefault - This allows you to write custom behavior for the event instead of relying on the default behavior. - livechat.js
+
+
+
+
+React.StrictMode - re render the component,identify the duplicate keys
+
+
+///USE MEMO///
+
+useMemo -> it will cache the results of calculation between re-renders.
+
+It Will have 2 arguments - callbackfunction , dependencies.
+
+only the dependecies changes it will be called
+
+if we perform high level operation in component that so many state useMemo will be useful
+
+
+///usecallback//
+
+Its used to cache the function definition between re-renders
+
+
+//useRef///
+
+UseRef will reference the value but it will not re-render the component again.
+
+
+
+
+//Memoization//
+
+Memoization is a speed optmization techinique in programming, where given a function ,it will return the cached version
+of the output,if the same input was used.
+
+//examples//
+
+
+//useRef///
+
+
+useRef is used to refer a value that is not needed rendering
+
+The useRef hook returns a plain JavaScript object with a single property named current,
+
+Memo.js
+
+memo will execute the component only if the props change.
+
+
+//USE CONTEXT//
+//USE EFFECT//
+//STATE LIFT UP//
+//Higher ORDER COMPONENTS//
+//PUSH THE CODE INTO SERVER//
+
+
+state lift up - 
+
+It refers to moving the state from lower level component to higher level component.
+this is done when multiple component need to share same state.
+child component need to update the state of its parent component.
+parent component take control of the child components
+
+import "./styles.css";
+import { useState } from "react";
+
+const Child = ({ value, increment }) => {
+  return (
+    <div>
+      <h1>child</h1>
+      <button onClick={increment}>add increment</button>
+    </div>
+  );
+};
+
+const Child2 = ({ value }) => {
+  console.log(value);
+  return (
+    <div>
+      <h1>count child2 : {value}</h1>
+    </div>
+  );
+};
+
+export default function App() {
+  const [count, setCount] = useState(0);
+
+  function increment() {
+    return setCount(count + 1);
+  }
+  return (
+    <div className="App">
+      <h1>Parent : {count} </h1>
+      <Child data={count} increment={increment} />
+      <Child2 value={count} />
+    </div>
+  );
+}
+
+
+ReactContext   usecontext///
+
+context used to store the data  and used to share the data to all the compoenents
+without send data like props drilling.
+
+context created using createContext function and it returns object with two properties
+1.consumer - consumer used to consume the data from any component
+2.provider - provider used to provide the data to any component.
+
+consumer and useContext are used to access the context
+
+
+import Child1 from "./Child1";
+import "./styles.css";
+import { createContext, useState } from "react";
+
+export const userContext = createContext();
+
+export default function App() {
+  const [name, setName] = useState("raja");
+  return (
+    <userContext.Provider value={{ name, setName }}>
+      <div>
+        <h1>Parent</h1>
+        <Child1 />
+      </div>
+    </userContext.Provider>
+  );
+}
+
+
+import Child2 from "./Child2";
+
+const Child1 = () => {
+  return (
+    <div>
+      <h1>Child1</h1>
+      <Child2 />
+    </div>
+  );
+};
+
+export default Child1;
+
+
+import { useContext } from "react";
+import { userContext } from "./App";
+
+const Child2 = () => {
+  const { name, setName } = useContext(userContext);
+  console.log(name);
+  return (
+    <div>
+      <h1>Child2</h1>
+      <h2>{name}</h2>
+      <button onClick={() => setName("rengaraja")}>change the name</button>
+    </div>
+  );
+};
+
+export default Child2;
+
+
+
+///useEffect///
+
+https://api.github.com/users/R-Renga
+
+
+
+//higherorder-recursive-nested//
+
+import React from "react";
+
+const commentData = [
+  {
+    name: "raja",
+    comments: "hi welcome",
+    replies: [
+      {
+        name: "raja2",
+        comments: "hi welcome",
+        replies: []
+      }
+    ]
+  }
+];
+
+const Comment = ({ record }) => {
+  console.log(record);
+  const { name, comments } = record;
+  return (
+    <div>
+      <h1>{name}</h1>
+      <h2>{comments}</h2>
+    </div>
+  );
+};
+
+const CommentList = ({ commentData }) => {
+  console.log(commentData);
+  return commentData.map((record, index) => (
+    <div key={index}>
+      <Comment record={record} />
+      <CommentList commentData={record.replies} />
+    </div>
+  ));
+};
+
+const Child1 = () => {
+  return (
+    <div>
+      <h1>Child1</h1>
+      <CommentList commentData={commentData} />
+    </div>
+  );
+};
+
+export default Child1;
+
+
+// Dependencies
+import React from "react";
+import Child1 from "../src/Child1";
+
+// Styles
+import "./tailwind.output.css";
+
+const App = () => {
+  return (
+    <div>
+      <h1 className="font-bold">Home</h1>
+      <Child1 />
+    </div>
+  );
+};
+
+export default App;
+
+
+
+//HighorderComponents///
+
+high order component is a function ,that takes component as a argument and return a new component.
+
+import Profiler from "./Profiler";
+import "./styles.css";
+
+export default function App() {
+  return (
+    <div className="App">
+      <h1>Hello CodeSandbox</h1>
+      <h2>Start editing to see some magic happen!</h2>
+      <Profiler />
+    </div>
+  );
+
+
+  const isAuthenticated = false;
+
+const WithAuthenticated = (Componenet) => {
+  return function () {
+    if (!isAuthenticated) {
+      return <div>not login</div>;
+    }
+    return <Componenet />;
+  };
+};
+
+export default WithAuthenticated;
+
+
+import React from "react";
+import WithAuthenticated from "./WithAuthenticated";
+
+function Profiler() {
+  return <div>Profiler</div>;
+}
+
+export default WithAuthenticated(Profiler);
